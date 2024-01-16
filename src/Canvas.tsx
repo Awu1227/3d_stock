@@ -1,14 +1,12 @@
 import { useState,useEffect } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
+import { Canvas } from '@react-three/fiber'
 import { Html, OrbitControls } from '@react-three/drei'
-import { Slider,Switch,Table,Image } from 'antd'
+import {Table,Image } from 'antd'
 
 function Box() {
-  const [size, set] = useState(0.5)
-  const [wireframe, setWireframe] = useState(true)
     const [visible, setVisible] = useState(false);
 
-  const [tableData, setTableData] = useState([])
+  const [tableData, setTableData] = useState({})
   useEffect(() => {
     fetch('https://dummyjson.com/products')
   .then(res => res.json())
@@ -19,14 +17,7 @@ function Box() {
   });
   },[])
 
-  const controls = useThree((state) => state.controls) 
-  const state = useThree((state) => state)
-  
-  const switchChange = (isSunday:boolean) => {
-    console.log('isSunday', isSunday, state);
-    setWireframe(isSunday)
-    
-  }
+
   const columns = [
     {
     title: 'Brand',
