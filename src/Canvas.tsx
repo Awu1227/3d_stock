@@ -6,7 +6,11 @@ import {Table,Image } from 'antd'
 function Box() {
     const [visible, setVisible] = useState(false);
 
-  const [tableData, setTableData] = useState({})
+  const [tableData, setTableData] = useState({
+    products: [],
+    limit: 0,
+    skip:0
+  })
   useEffect(() => {
     fetch('https://dummyjson.com/products')
   .then(res => res.json())
