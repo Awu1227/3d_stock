@@ -1,4 +1,4 @@
-import React,{ useState,useEffect, useTransition } from 'react'
+import React,{ useState,useEffect } from 'react'
 import { Canvas ,useFrame,} from '@react-three/fiber'
 import { Html, Text, OrbitControls,Environment,AccumulativeShadows, RandomizedLight, Center } from '@react-three/drei'
 import { EffectComposer, Outline } from '@react-three/postprocessing'
@@ -16,7 +16,7 @@ interface DataType {
 }
 const Box: React.FC<TBoxProps> = ({position,title})=> {
   const [time, setTime] = useState('')
-    const [hovered, hover] = useState(null)
+    const [, hover] = useState(null)
   const [tableData, setTableData] = useState({
     diff: [],
     total: 0,
@@ -119,6 +119,6 @@ function Env() {
     const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()+''
     setHour(hours)
 })
-  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0.65} />
+  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0} />
 }
 export default CanvasApp;
