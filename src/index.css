@@ -13,4 +13,5 @@ body,
 
 body {
   background: #f0f0f0;
+   cursor: url('https://raw.githubusercontent.com/chenglou/react-motion/master/demos/demo8-draggable-list/cursor.png') 39 39, auto;
 }

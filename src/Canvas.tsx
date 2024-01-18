@@ -1,10 +1,9 @@
-import React,{ useState,useEffect } from 'react'
+import React,{ useState,useEffect, useTransition } from 'react'
 import { Canvas ,useFrame,} from '@react-three/fiber'
-import { Html, Text, OrbitControls, } from '@react-three/drei'
-import { Selection, Select, EffectComposer, Outline } from '@react-three/postprocessing'
+import { Html, Text, OrbitControls,Environment,AccumulativeShadows, RandomizedLight, Center } from '@react-three/drei'
+import { EffectComposer, Outline } from '@react-three/postprocessing'
 import { Card, Table, type TableColumnsType  } from 'antd'
 import { getInfo } from './utils/request';
-
 interface TBoxProps  {
   position: number[],
   title: string
@@ -34,7 +33,8 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
       
       setTableData(res.data)
     })
-  },[])
+  }, [])
+  
   useFrame(() => {
     const nowTime = Date.now()
     const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()
@@ -69,21 +69,24 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
 ];
   return (
     <group>
-      <Text  fontSize={1.4} strokeWidth={1} depthOffset={1} strokeColor={'red'} position={[position[0],2.6,position[2]]} >
+      <Text  fontSize={1.4} strokeWidth={1} depthOffset={1} strokeColor={'red'} position={[position[0],4.6,position[2]]} >
           {time}
           <meshStandardMaterial color="red" toneMapped={false} />
       </Text>
-       <Select enabled={hovered}>
-        <mesh  position={[position[0], position[1], position[2]]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)}>
+          <Center top>
+        <mesh  position={[position[0], position[1], position[2]]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)} castShadow>
       <boxGeometry args={[4,4,0.5]}  />
-      <meshNormalMaterial/>
+      <meshStandardMaterial metalness={1} roughness={0} />
       <Html occlude distanceFactor={1.5} position={[0, 0, 0.26]} transform>
         <Card title={title} bordered={false} style={{ width: 800}} headStyle={{textAlign:'center'}} >
           <Table columns={columns} dataSource={tableData.diff} />
       </Card>
       </Html>
         </mesh>
-        </Select>
+        </Center>
+        <AccumulativeShadows temporal frames={200} color="purple" colorBlend={0.5} opacity={1} scale={10} alphaTest={0.85}>
+          <RandomizedLight amount={10} radius={5} ambient={0.5} position={[5, 2, 2]} bias={0.001} />
+        </AccumulativeShadows>
     </group>
 
   )
@@ -94,21 +97,28 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
 function CanvasApp() {
 
   return (
-    <Canvas camera={{ position: [10, 0, 10], fov: 25 }}>
+    <Canvas shadows camera={{ position: [10, 20, 24], fov: 25 }}>
       
       <ambientLight color={'lightblue'}/>
       <pointLight position={[10, 10, 5]} color={'red'} intensity={10}/>
       <pointLight position={[-10, -10, -10]} />
 
-      <Selection>
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline blur visibleEdgeColor={0xff0000} edgeStrength={10} width={2000} />
         </EffectComposer>
-      <Box position={[0,0,0]}  title={'板块2'} />
-      </Selection>
-      <OrbitControls makeDefault />
+        <Box position={[0, 2, 0]} title={'板块2'} />
+      <Env />
+      <OrbitControls   minPolarAngle={Math.PI / 2.2} maxPolarAngle={Math.PI / 2.1}/>
     </Canvas>
   )
 }
-
+function Env() {
+    const [hour, setHour] = useState('')
+  useFrame(() => {
+    const nowTime = Date.now()
+    const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()+''
+    setHour(hours)
+})
+  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0.65} />
+}
 export default CanvasApp;
