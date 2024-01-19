@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { useAspect, useVideoTexture, useTexture, OrbitControls } from '@react-three/drei'
+import { useVideoTexture, useTexture } from '@react-three/drei'
 import pic from '/images/10.jpg'
 import video from '/videos/10.mp4'
 console.log('pic',pic);
@@ -24,5 +24,5 @@ function VideoMaterial({ url }) {
 
 function FallbackMaterial({ url }) {
   const texture = useTexture(url)
-  return <meshBasicMaterial map={texture} toneMapped={false} />
+  return <meshBasicMaterial map={texture as any} toneMapped={false} />
 }
