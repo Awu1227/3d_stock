@@ -1,0 +1,11 @@
+Model Information:
+* title:	BILLBOARD
+* source:	https://sketchfab.com/3d-models/billboard-aff09bb0f9114eafbf15bd0fcf128955
+* author:	Joao_Cunha (https://sketchfab.com/Joao_Cunha)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "BILLBOARD" (https://sketchfab.com/3d-models/billboard-aff09bb0f9114eafbf15bd0fcf128955) by Joao_Cunha (https://sketchfab.com/Joao_Cunha) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

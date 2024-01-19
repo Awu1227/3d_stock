@@ -1,9 +1,11 @@
 import React,{ useState,useEffect } from 'react'
-import { Canvas ,useFrame,} from '@react-three/fiber'
-import { Html, Text, OrbitControls,Environment,AccumulativeShadows, RandomizedLight, Center } from '@react-three/drei'
+import { Canvas ,useFrame} from '@react-three/fiber'
+import { Html, Text, OrbitControls, Environment, AccumulativeShadows, RandomizedLight, Center } from '@react-three/drei'
 import { EffectComposer, Outline } from '@react-three/postprocessing'
 import { Card, Table, type TableColumnsType  } from 'antd'
 import { getInfo } from './utils/request';
+import Model from './Model';
+import Video from './Video';
 interface TBoxProps  {
   position: number[],
   title: string
@@ -98,7 +100,8 @@ function CanvasApp() {
 
   return (
     <Canvas shadows camera={{ position: [10, 20, 24], fov: 25 }}>
-      
+      <Video />
+      <Model />
       <ambientLight color={'lightblue'}/>
       <pointLight position={[10, 10, 5]} color={'red'} intensity={10}/>
       <pointLight position={[-10, -10, -10]} />
@@ -119,6 +122,6 @@ function Env() {
     const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()+''
     setHour(hours)
 })
-  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0} />
+  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0.65} />
 }
 export default CanvasApp;
