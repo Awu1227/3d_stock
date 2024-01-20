@@ -70,7 +70,7 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
 
 ];
   return (
-    <group visible={false}>
+    <group >
       <Text  fontSize={1.4} strokeWidth={1} depthOffset={1} strokeColor={'red'} position={[position[0],4.6,position[2]]} >
           {time}
           <meshStandardMaterial color="red" toneMapped={false} />
@@ -79,11 +79,11 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
         <mesh  position={[position[0], position[1], position[2]]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)} castShadow>
       <boxGeometry args={[4,4,0.5]}  />
       <meshStandardMaterial metalness={1} roughness={0} />
-      {/* <Html occlude distanceFactor={1.5} position={[0, 0, 0.26]} transform>
+      <Html occlude distanceFactor={1.5} position={[0, 0, 0.26]} transform>
         <Card title={title} bordered={false} style={{ width: 800}} headStyle={{textAlign:'center'}} >
           <Table columns={columns} dataSource={tableData.diff} />
       </Card>
-      </Html> */}
+      </Html>
         </mesh>
         </Center>
         <AccumulativeShadows temporal frames={200} color="purple" colorBlend={0.5} opacity={1} scale={10} alphaTest={0.85}>
@@ -109,7 +109,7 @@ function CanvasApp() {
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline blur visibleEdgeColor={0xff0000} edgeStrength={10} width={2000} />
         </EffectComposer>
-        <Box position={[0, 2, 0]} title={'板块2'} />
+        <Box position={[4, 2, 2]} title={'板块2'} />
       <Env />
       <OrbitControls   minPolarAngle={Math.PI / 2.2} maxPolarAngle={Math.PI / 2.1}/>
     </Canvas>
