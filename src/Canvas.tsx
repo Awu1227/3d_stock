@@ -70,7 +70,7 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
 
 ];
   return (
-    <group >
+    <group visible={false}>
       <Text  fontSize={1.4} strokeWidth={1} depthOffset={1} strokeColor={'red'} position={[position[0],4.6,position[2]]} >
           {time}
           <meshStandardMaterial color="red" toneMapped={false} />
@@ -109,14 +109,14 @@ function CanvasApp() {
         <EffectComposer multisampling={8} autoClear={false}>
           <Outline blur visibleEdgeColor={0xff0000} edgeStrength={10} width={2000} />
         </EffectComposer>
-        <Box position={[4, 2, 2]} title={'板块2'} />
+        <Box position={[0, 2, 0]} title={'板块2'} />
       <Env />
       <OrbitControls   minPolarAngle={Math.PI / 2.2} maxPolarAngle={Math.PI / 2.1}/>
     </Canvas>
   )
 }
 function Env() {
-    const [hour, setHour] = useState('')
+    const [, setHour] = useState('')
   useFrame(() => {
     const nowTime = Date.now()
     const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()+''
