@@ -87,7 +87,7 @@ function CanvasApp() {
   return (
     <Canvas shadows camera={{ position: [10, 20, 24], fov: 25 }} gl={{ preserveDrawingBuffer: true }}>
       <color attach="background" args={['#f2f2f5']} />
-                  <Text_3D config={config} rotation={[0, 0, 0]} position={[0, -1, 2.25]}>
+      <Text_3D config={config} rotation={[0, 0, 0]} position={[0, 6, -1.25]}>
         {text}
       </Text_3D>
       {/* <Video /> */}
@@ -102,7 +102,7 @@ function CanvasApp() {
 
       <Env />
           
-            <AccumulativeShadows frames={100} color={shadow} colorBlend={5} toneMapped={true} alphaTest={0.9} opacity={1} scale={30} position={[0, -1.01, 0]}>
+        <AccumulativeShadows frames={100} color={shadow} colorBlend={5} toneMapped={true} alphaTest={0.9} opacity={1} scale={300} position={[0, -1.01, 0]}>
         <RandomizedLight amount={4} radius={10} ambient={0.5} intensity={1} position={[0, 10, -10]} size={15} mapSize={1024} bias={0.0001} />
       </AccumulativeShadows>
       <OrbitControls   minPolarAngle={Math.PI / 2.2} maxPolarAngle={Math.PI / 2.1}/>
