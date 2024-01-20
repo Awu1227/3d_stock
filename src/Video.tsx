@@ -6,7 +6,6 @@ console.log('pic',pic);
 
 
 export default function Video() {
-  // const size = useAspect(1800, 1000)
   return (
     <mesh scale={[1,0.8,1]} position={[-0.34,2.54,1.8]}>
       <planeGeometry args={[2.9, 2, 1]}  />
