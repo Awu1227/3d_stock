@@ -70,7 +70,7 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
 
 ];
   return (
-    <group>
+    <group visible={false}>
       <Text  fontSize={1.4} strokeWidth={1} depthOffset={1} strokeColor={'red'} position={[position[0],4.6,position[2]]} >
           {time}
           <meshStandardMaterial color="red" toneMapped={false} />
@@ -79,11 +79,11 @@ const Box: React.FC<TBoxProps> = ({position,title})=> {
         <mesh  position={[position[0], position[1], position[2]]} onPointerOver={() => hover(true)} onPointerOut={() => hover(false)} castShadow>
       <boxGeometry args={[4,4,0.5]}  />
       <meshStandardMaterial metalness={1} roughness={0} />
-      <Html occlude distanceFactor={1.5} position={[0, 0, 0.26]} transform>
+      {/* <Html occlude distanceFactor={1.5} position={[0, 0, 0.26]} transform>
         <Card title={title} bordered={false} style={{ width: 800}} headStyle={{textAlign:'center'}} >
           <Table columns={columns} dataSource={tableData.diff} />
       </Card>
-      </Html>
+      </Html> */}
         </mesh>
         </Center>
         <AccumulativeShadows temporal frames={200} color="purple" colorBlend={0.5} opacity={1} scale={10} alphaTest={0.85}>
@@ -122,6 +122,14 @@ function Env() {
     const hours =  new Date(nowTime).getHours() < 10 ? '0'+new Date(nowTime).getHours(): new Date(nowTime).getHours()+''
     setHour(hours)
 })
-  return <Environment preset={parseInt(hour) > 16 ?  'night' : "sunset"} background blur={0.65} />
+  return <Environment     files={[
+      'px.jpg',
+      'nx.jpg',
+      'py.jpg',
+      'ny.jpg',
+      'pz.jpg',
+      'nz.jpg'
+    ]}
+    path="/3d_stock/textures/skyboxsun25deg/" background blur={0} />
 }
 export default CanvasApp;
